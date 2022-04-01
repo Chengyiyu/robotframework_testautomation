@@ -13,4 +13,3 @@ robotframework-selenium2library
 webdrivermanager
 robotframework-angularjs
 robotframework-xvfb
-celery
