@@ -1,0 +1,12 @@
+1648780040366	geckodriver	INFO	Listening on 127.0.0.1:33865
+1648780040393	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "50735" "-no-remote" "-profile" "/tmp/rust_mozprofileEVNaRu"
+1648780041558	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileEVNaRu/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50735/devtools/browser/68568c43-15b4-49b9-9c81-a111e3f9640e
+1648780044268	Marionette	INFO	Listening on port 34683
+1648780044360	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://10.32.50.50/source.min.js, line 128: Error: Not Authorized
+JavaScript error: https://10.32.50.50/source.min.js, line 128: Error: Not Authorized
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://10.32.50.50"
+1648780071147	Marionette	INFO	Stopped listening on port 34683
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.

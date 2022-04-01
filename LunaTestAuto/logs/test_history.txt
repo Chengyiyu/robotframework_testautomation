@@ -1,0 +1,3 @@
+2022-03-30 03:26:28:178756:LunaTestAuto.Test List.Basic Test.Chassis Power Control:ipmi_chassis_power_off:FAIL
+20220330032805518548:LunaTestAuto.Test List.Basic Test.Chassis Power Control:ipmi_chassis_power_off:FAIL
+20220330033121455637:LunaTestAuto.Test List.Basic Test.Chassis Power Control:ipmi_chassis_power_off:FAIL

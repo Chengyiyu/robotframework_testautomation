@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0 (Python 3.8.10 on linux)" generated="20220401 02:29:48.983" rpa="false" schemaversion="3">
+<suite id="s1" name="Chassis Power Control" source="/home/caesar/Desktop/LunaTestAuto/Test_List/Basic_Test/chassis_power_control.robot">
+<kw name="Suite Setup Execution" library="GUI_Resource" type="SETUP">
+<doc>Do test suite setup tasks.</doc>
+<kw name="Launch Browser And Login GUI" library="GUI_Resource">
+<doc>Launch browser and login to NVDIA GUI.</doc>
+<kw name="Open Browser With URL" library="GUI_Resource">
+<arg>${webgui_url}</arg>
+<doc>Open browser with specified URL and returns browser id.</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${browser_ID}</var>
+<arg>'${mode}' == 'headless'</arg>
+<arg>Launch Headless Browser</arg>
+<arg>${URL}</arg>
+<arg>${browser}</arg>
+<arg>ELSE</arg>
+<arg>Open Browser</arg>
+<arg>${URL}</arg>
+<arg>${browser}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Launch Headless Browser" library="GUI_Resource">
+<arg>${URL}</arg>
+<arg>${browser}</arg>
+<doc>Launch headless browser.</doc>
+<kw name="Start Virtual Display" library="XvfbRobot">
+<doc>Starts virtual display which will be
+ destroyed after test execution will be end</doc>
+<msg timestamp="20220401 02:29:49.628" level="INFO">Using virtual display: '1440x900x24'</msg>
+<status status="PASS" starttime="20220401 02:29:49.628" endtime="20220401 02:29:49.741"/>
+</kw>
+<kw name="Open Browser" library="Selenium2Library">
+<var>${browser_ID}</var>
+<arg>${URL}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220401 02:29:49.743" level="INFO">Opening browser 'firefox' to base url 'https://10.32.50.50'.</msg>
+<msg timestamp="20220401 02:29:49.745" level="INFO">Firefox driver log is always forced to to: /home/caesar/Desktop/LunaTestAuto/Test_List/Basic_Test/geckodriver-7.log</msg>
+<msg timestamp="20220401 02:29:54.973" level="INFO">${browser_ID} = 1</msg>
+<status status="PASS" starttime="20220401 02:29:49.741" endtime="20220401 02:29:54.973"/>
+</kw>
+<kw name="Set Window Size" library="Selenium2Library">
+<arg>1920</arg>
+<arg>1080</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" starttime="20220401 02:29:54.973" endtime="20220401 02:29:55.031"/>
+</kw>
+<status status="PASS" starttime="20220401 02:29:49.627" endtime="20220401 02:29:55.032"/>
+</kw>
+<msg timestamp="20220401 02:29:55.032" level="INFO">${browser_ID} = 1</msg>
+<status status="PASS" starttime="20220401 02:29:49.626" endtime="20220401 02:29:55.032"/>
+</kw>
+<status status="PASS" starttime="20220401 02:29:49.624" endtime="20220401 02:29:55.032"/>
+</kw>
+<kw name="Login GUI" library="GUI_Resource">
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Login to NVDIA GUI.</doc>
+<kw name="Go To" library="Selenium2Library">
+<arg>${webgui_url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20220401 02:29:55.034" level="INFO">Opening url 'https://10.32.50.50'</msg>
+<status status="PASS" starttime="20220401 02:29:55.033" endtime="20220401 02:29:55.437"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="Selenium2Library">
+<arg>${xpath_textbox_username}</arg>
+<arg>timeout=60s</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20220401 02:29:55.437" endtime="20220401 02:29:59.215"/>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<arg>${xpath_textbox_username}</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220401 02:29:59.216" level="INFO">Typing text 'admin' into text field 'xpath=//*[@id='userid']'.</msg>
+<status status="PASS" starttime="20220401 02:29:59.216" endtime="20220401 02:29:59.268"/>
+</kw>
+<kw name="Input Password" library="Selenium2Library">
+<arg>${xpath_textbox_password}</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20220401 02:29:59.269" level="INFO">Typing password into text field 'xpath=//*[@id='password']'.</msg>
+<msg timestamp="20220401 02:29:59.287" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20220401 02:29:59.326" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" starttime="20220401 02:29:59.268" endtime="20220401 02:29:59.326"/>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<arg>${xpath_login_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:29:59.327" level="INFO">Clicking element 'xpath=//*[@id='btn-login']'.</msg>
+<status status="PASS" starttime="20220401 02:29:59.326" endtime="20220401 02:29:59.612"/>
+</kw>
+<status status="PASS" starttime="20220401 02:29:55.033" endtime="20220401 02:29:59.613"/>
+</kw>
+<status status="PASS" starttime="20220401 02:29:49.624" endtime="20220401 02:29:59.613"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>30 sec</arg>
+<arg>5 sec</arg>
+<arg>Location Should Contain</arg>
+<arg>dashboard</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<kw name="Location Should Contain" library="Selenium2Library">
+<arg>dashboard</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20220401 02:29:59.912" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-8.png"&gt;&lt;img src="selenium-screenshot-8.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20220401 02:29:59.913" level="FAIL">Location should have contained 'dashboard' but it was 'https://10.32.50.50/#login'.</msg>
+<status status="FAIL" starttime="20220401 02:29:59.613" endtime="20220401 02:29:59.915"/>
+</kw>
+<kw name="Location Should Contain" library="Selenium2Library">
+<arg>dashboard</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20220401 02:30:05.075" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-9.png"&gt;&lt;img src="selenium-screenshot-9.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20220401 02:30:05.076" level="FAIL">Location should have contained 'dashboard' but it was 'https://10.32.50.50/#login'.</msg>
+<status status="FAIL" starttime="20220401 02:30:04.916" endtime="20220401 02:30:05.076"/>
+</kw>
+<kw name="Location Should Contain" library="Selenium2Library">
+<arg>dashboard</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<msg timestamp="20220401 02:30:10.086" level="INFO">Current location contains 'dashboard'.</msg>
+<status status="PASS" starttime="20220401 02:30:10.077" endtime="20220401 02:30:10.086"/>
+</kw>
+<status status="PASS" starttime="20220401 02:29:59.613" endtime="20220401 02:30:10.087"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="Selenium2Library">
+<arg>${xpath_processing_image}</arg>
+<arg>timeout=300s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20220401 02:30:10.087" endtime="20220401 02:30:16.285"/>
+</kw>
+<status status="PASS" starttime="20220401 02:29:49.623" endtime="20220401 02:30:16.286"/>
+</kw>
+<test id="s1-t1" name="chassis power on" line="36">
+<kw name="Go To" library="Selenium2Library">
+<arg>${power_control_url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20220401 02:30:16.294" level="INFO">Opening url 'https://10.32.50.50/#power-control'</msg>
+<status status="PASS" starttime="20220401 02:30:16.293" endtime="20220401 02:30:16.378"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="Selenium2Library">
+<arg>${xpath_processing_image}</arg>
+<arg>timeout=300s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20220401 02:30:16.379" endtime="20220401 02:30:16.505"/>
+</kw>
+<kw name="Element Should Be Enabled" library="Selenium2Library">
+<arg>${xpath_save_button}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20220401 02:30:16.506" endtime="20220401 02:30:16.542"/>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<arg>${xpath_power_on_radio}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:30:16.543" level="INFO">Clicking element 'xpath=//*[@id="main"]/div/div/aside[2]/div/section[2]/div/div/div[2]/form/div[2]/label/div'.</msg>
+<status status="PASS" starttime="20220401 02:30:16.542" endtime="20220401 02:30:16.790"/>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<arg>${xpath_save_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:30:16.794" level="INFO">Clicking element 'xpath=//*[@id="save"]'.</msg>
+<status status="PASS" starttime="20220401 02:30:16.792" endtime="20220401 02:30:17.072"/>
+</kw>
+<kw name="Handle Alert" library="Selenium2Library">
+<doc>Handles the current alert and returns its message.</doc>
+<msg timestamp="20220401 02:30:17.073" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<status status="PASS" starttime="20220401 02:30:17.072" endtime="20220401 02:30:17.127"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>3min</arg>
+<arg>1s</arg>
+<arg>Check Chassis Power Status Util ON</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<kw name="Check Chassis Power Status Util ON">
+<kw name="Run External IPMI Standard Command" library="ipmi_client">
+<var>${output}</var>
+<arg>chassis power status</arg>
+<doc>Run the external IPMI standard command.</doc>
+<kw name="Process Ipmi User Options" library="ipmi_client">
+<var>${command_string}</var>
+<arg>${command}</arg>
+<doc>Return the buffer with any ipmi_user_options pre-pended.</doc>
+<msg timestamp="20220401 02:30:17.132" level="INFO">${command_string} = chassis power status</msg>
+<status status="PASS" starttime="20220401 02:30:17.131" endtime="20220401 02:30:17.136"/>
+</kw>
+<kw name="Create Ipmi Ext Command String" library="ipmi_client">
+<var>${ipmi_cmd}</var>
+<arg>${command_string}</arg>
+<arg>&amp;{options}</arg>
+<doc>Create and return an IPMI external command string which is fit to be run
+from a bash command line.</doc>
+<msg timestamp="20220401 02:30:17.143" level="INFO">${ipmi_cmd} = ipmitool -I lanplus -C 17 -N 3 -p 623 -U admin -P dgxluna.admin -H 10.32.50.50 chassis power status</msg>
+<status status="PASS" starttime="20220401 02:30:17.137" endtime="20220401 02:30:17.143"/>
+</kw>
+<kw name="Run And Return Rc And Output" library="OperatingSystem">
+<var>${rc}</var>
+<var>${output}</var>
+<arg>${ipmi_cmd}</arg>
+<doc>Runs the given command in the system and returns the RC and output.</doc>
+<msg timestamp="20220401 02:30:17.157" level="INFO">Running command 'ipmitool -I lanplus -C 17 -N 3 -p 623 -U admin -P dgxluna.admin -H 10.32.50.50 chassis power status 2&gt;&amp;1'.</msg>
+<msg timestamp="20220401 02:30:17.401" level="INFO">${rc} = 0</msg>
+<msg timestamp="20220401 02:30:17.401" level="INFO">${output} = Chassis Power is off</msg>
+<status status="PASS" starttime="20220401 02:30:17.143" endtime="20220401 02:30:17.401"/>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<arg>${fail_on_err} == ${0}</arg>
+<arg>${output}</arg>
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:30:17.402" endtime="20220401 02:30:17.404"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${rc}</arg>
+<arg>${expected_rc}</arg>
+<arg>msg=${output}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220401 02:30:17.404" endtime="20220401 02:30:17.405"/>
+</kw>
+<msg timestamp="20220401 02:30:17.406" level="INFO">${output} = Chassis Power is off</msg>
+<status status="PASS" starttime="20220401 02:30:17.128" endtime="20220401 02:30:17.406"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${output}</arg>
+<arg>Chassis Power is on</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:30:17.408" level="FAIL">'Chassis Power is off' does not contain 'Chassis Power is on'</msg>
+<status status="FAIL" starttime="20220401 02:30:17.406" endtime="20220401 02:30:17.408"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:30:17.128" endtime="20220401 02:30:17.410"/>
+</kw>
+<kw name="Check Chassis Power Status Util ON">
+<kw name="Run External IPMI Standard Command" library="ipmi_client">
+<var>${output}</var>
+<arg>chassis power status</arg>
+<doc>Run the external IPMI standard command.</doc>
+<kw name="Process Ipmi User Options" library="ipmi_client">
+<var>${command_string}</var>
+<arg>${command}</arg>
+<doc>Return the buffer with any ipmi_user_options pre-pended.</doc>
+<msg timestamp="20220401 02:30:18.424" level="INFO">${command_string} = chassis power status</msg>
+<status status="PASS" starttime="20220401 02:30:18.421" endtime="20220401 02:30:18.425"/>
+</kw>
+<kw name="Create Ipmi Ext Command String" library="ipmi_client">
+<var>${ipmi_cmd}</var>
+<arg>${command_string}</arg>
+<arg>&amp;{options}</arg>
+<doc>Create and return an IPMI external command string which is fit to be run
+from a bash command line.</doc>
+<msg timestamp="20220401 02:30:18.427" level="INFO">${ipmi_cmd} = ipmitool -I lanplus -C 17 -N 3 -p 623 -U admin -P dgxluna.admin -H 10.32.50.50 chassis power status</msg>
+<status status="PASS" starttime="20220401 02:30:18.425" endtime="20220401 02:30:18.427"/>
+</kw>
+<kw name="Run And Return Rc And Output" library="OperatingSystem">
+<var>${rc}</var>
+<var>${output}</var>
+<arg>${ipmi_cmd}</arg>
+<doc>Runs the given command in the system and returns the RC and output.</doc>
+<msg timestamp="20220401 02:30:18.438" level="INFO">Running command 'ipmitool -I lanplus -C 17 -N 3 -p 623 -U admin -P dgxluna.admin -H 10.32.50.50 chassis power status 2&gt;&amp;1'.</msg>
+<msg timestamp="20220401 02:30:18.645" level="INFO">${rc} = 0</msg>
+<msg timestamp="20220401 02:30:18.647" level="INFO">${output} = Chassis Power is off</msg>
+<status status="PASS" starttime="20220401 02:30:18.428" endtime="20220401 02:30:18.647"/>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<arg>${fail_on_err} == ${0}</arg>
+<arg>${output}</arg>
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:30:18.648" endtime="20220401 02:30:18.655"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${rc}</arg>
+<arg>${expected_rc}</arg>
+<arg>msg=${output}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220401 02:30:18.656" endtime="20220401 02:30:18.658"/>
+</kw>
+<msg timestamp="20220401 02:30:18.660" level="INFO">${output} = Chassis Power is off</msg>
+<status status="PASS" starttime="20220401 02:30:18.413" endtime="20220401 02:30:18.661"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${output}</arg>
+<arg>Chassis Power is on</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:30:18.666" level="FAIL">'Chassis Power is off' does not contain 'Chassis Power is on'</msg>
+<status status="FAIL" starttime="20220401 02:30:18.662" endtime="20220401 02:30:18.667"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:30:18.411" endtime="20220401 02:30:18.671"/>
+</kw>
+<kw name="Check Chassis Power Status Util ON">
+<kw name="Run External IPMI Standard Command" library="ipmi_client">
+<var>${output}</var>
+<arg>chassis power status</arg>
+<doc>Run the external IPMI standard command.</doc>
+<kw name="Process Ipmi User Options" library="ipmi_client">
+<var>${command_string}</var>
+<arg>${command}</arg>
+<doc>Return the buffer with any ipmi_user_options pre-pended.</doc>
+<msg timestamp="20220401 02:30:19.678" level="INFO">${command_string} = chassis power status</msg>
+<status status="PASS" starttime="20220401 02:30:19.676" endtime="20220401 02:30:19.678"/>
+</kw>
+<kw name="Create Ipmi Ext Command String" library="ipmi_client">
+<var>${ipmi_cmd}</var>
+<arg>${command_string}</arg>
+<arg>&amp;{options}</arg>
+<doc>Create and return an IPMI external command string which is fit to be run
+from a bash command line.</doc>
+<msg timestamp="20220401 02:30:19.679" level="INFO">${ipmi_cmd} = ipmitool -I lanplus -C 17 -N 3 -p 623 -U admin -P dgxluna.admin -H 10.32.50.50 chassis power status</msg>
+<status status="PASS" starttime="20220401 02:30:19.678" endtime="20220401 02:30:19.679"/>
+</kw>
+<kw name="Run And Return Rc And Output" library="OperatingSystem">
+<var>${rc}</var>
+<var>${output}</var>
+<arg>${ipmi_cmd}</arg>
+<doc>Runs the given command in the system and returns the RC and output.</doc>
+<msg timestamp="20220401 02:30:19.685" level="INFO">Running command 'ipmitool -I lanplus -C 17 -N 3 -p 623 -U admin -P dgxluna.admin -H 10.32.50.50 chassis power status 2&gt;&amp;1'.</msg>
+<msg timestamp="20220401 02:30:19.910" level="INFO">${rc} = 0</msg>
+<msg timestamp="20220401 02:30:19.910" level="INFO">${output} = Chassis Power is on</msg>
+<status status="PASS" starttime="20220401 02:30:19.680" endtime="20220401 02:30:19.910"/>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<arg>${fail_on_err} == ${0}</arg>
+<arg>${output}</arg>
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:30:19.910" endtime="20220401 02:30:19.914"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${rc}</arg>
+<arg>${expected_rc}</arg>
+<arg>msg=${output}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220401 02:30:19.914" endtime="20220401 02:30:19.915"/>
+</kw>
+<msg timestamp="20220401 02:30:19.916" level="INFO">${output} = Chassis Power is on</msg>
+<status status="PASS" starttime="20220401 02:30:19.673" endtime="20220401 02:30:19.916"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${output}</arg>
+<arg>Chassis Power is on</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220401 02:30:19.917" endtime="20220401 02:30:19.918"/>
+</kw>
+<status status="PASS" starttime="20220401 02:30:19.672" endtime="20220401 02:30:19.918"/>
+</kw>
+<status status="PASS" starttime="20220401 02:30:17.127" endtime="20220401 02:30:19.918"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>${OS_WAIT_TIMEOUT}min</arg>
+<arg>15s</arg>
+<arg>Open Connection And Log In</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:30:19.920" endtime="20220401 02:30:19.921"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:30:19.922" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:30:40.958" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:30:19.921" endtime="20220401 02:30:40.963"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:30:19.919" endtime="20220401 02:30:40.970"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:30:55.974" endtime="20220401 02:30:55.978"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:30:55.981" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:31:17.033" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:30:55.979" endtime="20220401 02:31:17.034"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:30:55.972" endtime="20220401 02:31:17.039"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:31:32.042" endtime="20220401 02:31:32.043"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:31:32.047" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:31:53.096" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:31:32.045" endtime="20220401 02:31:53.097"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:31:32.041" endtime="20220401 02:31:53.100"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:32:08.101" endtime="20220401 02:32:08.102"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:32:08.102" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:32:29.145" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:32:08.102" endtime="20220401 02:32:29.145"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:32:08.101" endtime="20220401 02:32:29.146"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:32:44.154" endtime="20220401 02:32:44.158"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:32:44.161" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:33:05.229" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:32:44.159" endtime="20220401 02:33:05.231"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:32:44.146" endtime="20220401 02:33:05.238"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:33:20.243" endtime="20220401 02:33:20.245"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:33:20.246" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:33:41.293" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:33:20.245" endtime="20220401 02:33:41.294"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:33:20.240" endtime="20220401 02:33:41.299"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:33:56.301" endtime="20220401 02:33:56.302"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:33:56.303" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:34:17.341" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:33:56.303" endtime="20220401 02:34:17.343"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:33:56.300" endtime="20220401 02:34:17.346"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:34:32.350" endtime="20220401 02:34:32.351"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:34:32.353" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:34:53.381" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:34:32.352" endtime="20220401 02:34:53.382"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:34:32.348" endtime="20220401 02:34:53.386"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:35:08.387" endtime="20220401 02:35:08.387"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:35:08.387" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:35:29.440" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:35:08.387" endtime="20220401 02:35:29.440"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:35:08.386" endtime="20220401 02:35:29.442"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:35:44.459" endtime="20220401 02:35:44.460"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:35:44.460" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:36:01.817" level="FAIL">NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 10.32.50.56</msg>
+<status status="FAIL" starttime="20220401 02:35:44.460" endtime="20220401 02:36:01.818"/>
+</kw>
+<status status="FAIL" starttime="20220401 02:35:44.458" endtime="20220401 02:36:01.821"/>
+</kw>
+<kw name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<arg>${OS_HOST}</arg>
+<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
+<status status="PASS" starttime="20220401 02:36:16.824" endtime="20220401 02:36:16.826"/>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<arg>${OS_USERNAME}</arg>
+<arg>${OS_PASSWORD}</arg>
+<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
+<msg timestamp="20220401 02:36:16.828" level="INFO">Logging into '10.32.50.56:22' as 'root'.</msg>
+<msg timestamp="20220401 02:36:17.945" level="INFO">Read output: Welcome to NVIDIA DGX Server Version 4.99.9 (GNU/Linux 5.3.0-59-generic x86_64)
+
+  System information as of Fri Apr  1 10:36:21 CST 2022
+
+  System load:  31.5             Processes:               2253
+  Usage of /:   1.2% of 1.72TB   Users logged in:         1
+  Memory usage: 0%               IP address for enp226s0: 10.32.50.56
+  Swap usage:   0%
+You have new mail.
+Last login: Fri Apr  1 10:36:11 2022</msg>
+<status status="PASS" starttime="20220401 02:36:16.826" endtime="20220401 02:36:17.945"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:16.822" endtime="20220401 02:36:17.946"/>
+</kw>
+<status status="PASS" starttime="20220401 02:30:19.919" endtime="20220401 02:36:17.946"/>
+</kw>
+<kw name="Close All Connections" library="SSHLibrary">
+<doc>Closes all open connections.</doc>
+<status status="PASS" starttime="20220401 02:36:17.947" endtime="20220401 02:36:17.949"/>
+</kw>
+<kw name="Go To" library="Selenium2Library">
+<arg>${event_log_ipmi_url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20220401 02:36:17.951" level="INFO">Opening url 'https://10.32.50.50/#logs/event-log'</msg>
+<status status="PASS" starttime="20220401 02:36:17.950" endtime="20220401 02:36:18.057"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="Selenium2Library">
+<arg>${xpath_processing_image}</arg>
+<arg>timeout=300s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20220401 02:36:18.058" endtime="20220401 02:36:18.772"/>
+</kw>
+<kw name="Get Element Count" library="Selenium2Library">
+<var>${count}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20220401 02:36:18.790" level="INFO">${count} = 41</msg>
+<status status="PASS" starttime="20220401 02:36:18.772" endtime="20220401 02:36:18.790"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${row}</var>
+<value>1</value>
+<value>${count}</value>
+<iter>
+<var name="${row}">1</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${irow}</var>
+<arg>[${row}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220401 02:36:18.791" level="INFO">${irow} = [1]</msg>
+<status status="PASS" starttime="20220401 02:36:18.791" endtime="20220401 02:36:18.791"/>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<var>${resp}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}${irow}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:36:18.858" level="INFO">${resp} = 41 2022-04-01, 02:33:59 0021h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a3h 00h 00h POST: boot transfer: M.2 #0 - Asserted</msg>
+<status status="PASS" starttime="20220401 02:36:18.791" endtime="20220401 02:36:18.858"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${find_log}</var>
+<arg>Should Contain</arg>
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:36:18.860" level="FAIL">'41 2022-04-01, 02:33:59 0021h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a3h 00h 00h POST: boot transfer: M.2 #0 - Asserted' does not contain 'c5h 6fh a1h 01h'</msg>
+<status status="FAIL" starttime="20220401 02:36:18.859" endtime="20220401 02:36:18.860"/>
+</kw>
+<msg timestamp="20220401 02:36:18.860" level="INFO">${find_log} = ('FAIL', "'41 2022-04-01, 02:33:59 0021h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a3h 00h 00h POST: boot transfer: M.2 #0 - Asserted' does not contain 'c5h 6fh a1h 01h'")</msg>
+<status status="PASS" starttime="20220401 02:36:18.859" endtime="20220401 02:36:18.860"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${find_log} == ('PASS', None)</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:36:18.860" endtime="20220401 02:36:18.861"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:18.791" endtime="20220401 02:36:18.861"/>
+</iter>
+<iter>
+<var name="${row}">2</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${irow}</var>
+<arg>[${row}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220401 02:36:18.861" level="INFO">${irow} = [2]</msg>
+<status status="PASS" starttime="20220401 02:36:18.861" endtime="20220401 02:36:18.861"/>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<var>${resp}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}${irow}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:36:18.911" level="INFO">${resp} = 40 2022-04-01, 02:33:58 0020h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a2h ffh ffh Post: end</msg>
+<status status="PASS" starttime="20220401 02:36:18.862" endtime="20220401 02:36:18.911"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${find_log}</var>
+<arg>Should Contain</arg>
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:36:18.912" level="FAIL">'40 2022-04-01, 02:33:58 0020h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a2h ffh ffh Post: end' does not contain 'c5h 6fh a1h 01h'</msg>
+<status status="FAIL" starttime="20220401 02:36:18.911" endtime="20220401 02:36:18.912"/>
+</kw>
+<msg timestamp="20220401 02:36:18.912" level="INFO">${find_log} = ('FAIL', "'40 2022-04-01, 02:33:58 0020h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a2h ffh ffh Post: end' does not contain 'c5h 6fh a1h 01h'")</msg>
+<status status="PASS" starttime="20220401 02:36:18.911" endtime="20220401 02:36:18.912"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${find_log} == ('PASS', None)</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:36:18.912" endtime="20220401 02:36:18.913"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:18.861" endtime="20220401 02:36:18.913"/>
+</iter>
+<iter>
+<var name="${row}">3</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${irow}</var>
+<arg>[${row}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220401 02:36:18.913" level="INFO">${irow} = [3]</msg>
+<status status="PASS" starttime="20220401 02:36:18.913" endtime="20220401 02:36:18.913"/>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<var>${resp}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}${irow}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:36:18.953" level="INFO">${resp} = 39 2022-04-01, 02:31:55 0021h SEL_NV_MEMORY dah memory 0ch 6fh a4h 02h 10h Memory Device Disabled(Boot error: Current boot error, CPU socket: CPU1, Channel: A, Memory controller: I, DIMM: DIMM I1) - A...</msg>
+<status status="PASS" starttime="20220401 02:36:18.913" endtime="20220401 02:36:18.953"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${find_log}</var>
+<arg>Should Contain</arg>
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:36:18.954" level="FAIL">'39 2022-04-01, 02:31:55 0021h SEL_NV_MEMORY dah memory 0ch 6fh a4h 02h 10h Memory Device Disabled(Boot error: Current boot error, CPU socket: CPU1, Channel: A, Memory controller: I, DIMM: DIMM I1) - Asserted' does not contain 'c5h 6fh a1h 01h'</msg>
+<status status="FAIL" starttime="20220401 02:36:18.954" endtime="20220401 02:36:18.955"/>
+</kw>
+<msg timestamp="20220401 02:36:18.955" level="INFO">${find_log} = ('FAIL', "'39 2022-04-01, 02:31:55 0021h SEL_NV_MEMORY dah memory 0ch 6fh a4h 02h 10h Memory Device Disabled(Boot error: Current boot error, CPU socket: CPU1, Channel: A, Memory controller: I, DIMM: D...</msg>
+<status status="PASS" starttime="20220401 02:36:18.954" endtime="20220401 02:36:18.955"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${find_log} == ('PASS', None)</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:36:18.955" endtime="20220401 02:36:18.955"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:18.913" endtime="20220401 02:36:18.955"/>
+</iter>
+<iter>
+<var name="${row}">4</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${irow}</var>
+<arg>[${row}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220401 02:36:18.956" level="INFO">${irow} = [4]</msg>
+<status status="PASS" starttime="20220401 02:36:18.956" endtime="20220401 02:36:18.956"/>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<var>${resp}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}${irow}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:36:18.998" level="INFO">${resp} = 38 2022-04-01, 02:31:55 0021h SEL_NV_MEMORY dah memory 0ch 6fh a4h 02h 00h Memory Device Disabled(Boot error: Current boot error, CPU socket: CPU1, Channel: A, Memory controller: I, DIMM: DIMM I0) - A...</msg>
+<status status="PASS" starttime="20220401 02:36:18.956" endtime="20220401 02:36:18.998"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${find_log}</var>
+<arg>Should Contain</arg>
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:36:18.999" level="FAIL">'38 2022-04-01, 02:31:55 0021h SEL_NV_MEMORY dah memory 0ch 6fh a4h 02h 00h Memory Device Disabled(Boot error: Current boot error, CPU socket: CPU1, Channel: A, Memory controller: I, DIMM: DIMM I0) - Asserted' does not contain 'c5h 6fh a1h 01h'</msg>
+<status status="FAIL" starttime="20220401 02:36:18.998" endtime="20220401 02:36:18.999"/>
+</kw>
+<msg timestamp="20220401 02:36:18.999" level="INFO">${find_log} = ('FAIL', "'38 2022-04-01, 02:31:55 0021h SEL_NV_MEMORY dah memory 0ch 6fh a4h 02h 00h Memory Device Disabled(Boot error: Current boot error, CPU socket: CPU1, Channel: A, Memory controller: I, DIMM: D...</msg>
+<status status="PASS" starttime="20220401 02:36:18.998" endtime="20220401 02:36:18.999"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${find_log} == ('PASS', None)</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:36:18.999" endtime="20220401 02:36:18.999"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:18.955" endtime="20220401 02:36:18.999"/>
+</iter>
+<iter>
+<var name="${row}">5</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${irow}</var>
+<arg>[${row}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220401 02:36:19.000" level="INFO">${irow} = [5]</msg>
+<status status="PASS" starttime="20220401 02:36:18.999" endtime="20220401 02:36:19.000"/>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<var>${resp}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}${irow}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:36:19.042" level="INFO">${resp} = 37 2022-04-01, 02:30:52 0020h SEL_NV_BIOS d8h NVIDIA_Bios c8h 6fh a2h 01h ffh BIOS: boot from Secondary flash</msg>
+<status status="PASS" starttime="20220401 02:36:19.000" endtime="20220401 02:36:19.043"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${find_log}</var>
+<arg>Should Contain</arg>
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:36:19.044" level="FAIL">'37 2022-04-01, 02:30:52 0020h SEL_NV_BIOS d8h NVIDIA_Bios c8h 6fh a2h 01h ffh BIOS: boot from Secondary flash' does not contain 'c5h 6fh a1h 01h'</msg>
+<status status="FAIL" starttime="20220401 02:36:19.043" endtime="20220401 02:36:19.044"/>
+</kw>
+<msg timestamp="20220401 02:36:19.044" level="INFO">${find_log} = ('FAIL', "'37 2022-04-01, 02:30:52 0020h SEL_NV_BIOS d8h NVIDIA_Bios c8h 6fh a2h 01h ffh BIOS: boot from Secondary flash' does not contain 'c5h 6fh a1h 01h'")</msg>
+<status status="PASS" starttime="20220401 02:36:19.043" endtime="20220401 02:36:19.044"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${find_log} == ('PASS', None)</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:36:19.044" endtime="20220401 02:36:19.045"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:18.999" endtime="20220401 02:36:19.045"/>
+</iter>
+<iter>
+<var name="${row}">6</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${irow}</var>
+<arg>[${row}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220401 02:36:19.045" level="INFO">${irow} = [6]</msg>
+<status status="PASS" starttime="20220401 02:36:19.045" endtime="20220401 02:36:19.045"/>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<var>${resp}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}${irow}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:36:19.092" level="INFO">${resp} = 36 2022-04-01, 02:30:52 0020h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a1h ffh ffh Post: start</msg>
+<status status="PASS" starttime="20220401 02:36:19.046" endtime="20220401 02:36:19.092"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${find_log}</var>
+<arg>Should Contain</arg>
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:36:19.093" level="FAIL">'36 2022-04-01, 02:30:52 0020h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a1h ffh ffh Post: start' does not contain 'c5h 6fh a1h 01h'</msg>
+<status status="FAIL" starttime="20220401 02:36:19.093" endtime="20220401 02:36:19.094"/>
+</kw>
+<msg timestamp="20220401 02:36:19.094" level="INFO">${find_log} = ('FAIL', "'36 2022-04-01, 02:30:52 0020h SEL_NV_POST_ERR d7h NVIDIA_POST_error c7h 6fh a1h ffh ffh Post: start' does not contain 'c5h 6fh a1h 01h'")</msg>
+<status status="PASS" starttime="20220401 02:36:19.092" endtime="20220401 02:36:19.094"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${find_log} == ('PASS', None)</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:36:19.094" endtime="20220401 02:36:19.095"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:19.045" endtime="20220401 02:36:19.095"/>
+</iter>
+<iter>
+<var name="${row}">7</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${irow}</var>
+<arg>[${row}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220401 02:36:19.096" level="INFO">${irow} = [7]</msg>
+<status status="PASS" starttime="20220401 02:36:19.095" endtime="20220401 02:36:19.096"/>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<var>${resp}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}${irow}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:36:19.145" level="INFO">${resp} = 35 2022-04-01, 02:30:24 0020h STATUS_SYS_PWR 9ah power_unit 09h efh 00h ffh ffh Host power on</msg>
+<status status="PASS" starttime="20220401 02:36:19.096" endtime="20220401 02:36:19.145"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${find_log}</var>
+<arg>Should Contain</arg>
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220401 02:36:19.146" level="FAIL">'35 2022-04-01, 02:30:24 0020h STATUS_SYS_PWR 9ah power_unit 09h efh 00h ffh ffh Host power on' does not contain 'c5h 6fh a1h 01h'</msg>
+<status status="FAIL" starttime="20220401 02:36:19.146" endtime="20220401 02:36:19.146"/>
+</kw>
+<msg timestamp="20220401 02:36:19.147" level="INFO">${find_log} = ('FAIL', "'35 2022-04-01, 02:30:24 0020h STATUS_SYS_PWR 9ah power_unit 09h efh 00h ffh ffh Host power on' does not contain 'c5h 6fh a1h 01h'")</msg>
+<status status="PASS" starttime="20220401 02:36:19.145" endtime="20220401 02:36:19.147"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${find_log} == ('PASS', None)</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220401 02:36:19.147" endtime="20220401 02:36:19.147"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:19.095" endtime="20220401 02:36:19.147"/>
+</iter>
+<iter>
+<var name="${row}">8</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${irow}</var>
+<arg>[${row}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220401 02:36:19.149" level="INFO">${irow} = [8]</msg>
+<status status="PASS" starttime="20220401 02:36:19.148" endtime="20220401 02:36:19.149"/>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<var>${resp}</var>
+<arg>${xpath_IPMI_Event_Log_table_row}${irow}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220401 02:36:19.221" level="INFO">${resp} = 34 2022-04-01, 02:30:20 0020h SEL_NV_CHASSIS d5h NVIDIA_Chassis c5h 6fh a1h 01h ffh Chassis: power Up: Chassis Control command</msg>
+<status status="PASS" starttime="20220401 02:36:19.149" endtime="20220401 02:36:19.221"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${find_log}</var>
+<arg>Should Contain</arg>
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${resp}</arg>
+<arg>c5h 6fh a1h 01h</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220401 02:36:19.222" endtime="20220401 02:36:19.223"/>
+</kw>
+<msg timestamp="20220401 02:36:19.223" level="INFO">${find_log} = ('PASS', None)</msg>
+<status status="PASS" starttime="20220401 02:36:19.222" endtime="20220401 02:36:19.223"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${find_log} == ('PASS', None)</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<msg timestamp="20220401 02:36:19.224" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20220401 02:36:19.223" endtime="20220401 02:36:19.225"/>
+</kw>
+<status status="PASS" starttime="20220401 02:36:19.148" endtime="20220401 02:36:19.225"/>
+</iter>
+<status status="PASS" starttime="20220401 02:36:18.790" endtime="20220401 02:36:19.225"/>
+</for>
+<kw name="Should Not Contain" library="BuiltIn">
+<arg>${find_log}</arg>
+<arg>FAIL</arg>
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220401 02:36:19.225" endtime="20220401 02:36:19.226"/>
+</kw>
+<doc>This test case verfies system power on status
+Check capability of power control on Web GUI.</doc>
+<tag>chassis power on</tag>
+<status status="PASS" starttime="20220401 02:30:16.287" endtime="20220401 02:36:19.226"/>
+</test>
+<kw name="Close All Browsers" library="Selenium2Library" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20220401 02:36:19.228" endtime="20220401 02:36:19.664"/>
+</kw>
+<status status="PASS" starttime="20220401 02:29:48.984" endtime="20220401 02:36:19.665"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">chassis power on</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Chassis Power Control">Chassis Power Control</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
