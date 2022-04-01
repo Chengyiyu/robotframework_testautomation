@@ -31,8 +31,14 @@ error password
     ...    4. Try WebUI login after 10 minutes, it works fine.
     Launch Headless Browser
     FOR    ${error_time}    IN RANGE    6
-        Login GUI    admin    errorpassword${error_time}
+        Run Keyword And Ignore Error    Login GUI    admin    errorpassword${error_time}
     END
+    Page Should Contain    User has been locked out. Try after few minutes
+    Close All Browsers
+    sleep    10min
+    Launch Headless Browser
+    Page Should Not Contain    User has been locked out. Try after few minutes
+    Login GUI    ${LUNA_USERNAME}    ${LUNA_PASSWORD}
     Close All Browsers
 
 *** Keywords ***
