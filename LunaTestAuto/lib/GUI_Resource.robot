@@ -29,7 +29,7 @@ Launch Headless Browser
     # browser    Browser to open given URL in headless way
     #    (e.g. gc for google chrome, ff for firefox).
     Start Virtual Display
-    ${browser_ID}=    Open Browser    ${URL}
+    ${browser_ID}=    Open Browser    ${URL}    ${browser}
     Set Window Size    1920    1080
     [Return]    ${browser_ID}
 
@@ -55,8 +55,10 @@ Login GUI
     # Description of argument(s):
     # username    The username to be used for login.
     # password    The password to be used for login.
-    Go To    ${webgui_url}
-    Wait Until Element Is Enabled    ${xpath_textbox_username}    timeout=60s
+    Go To    ${webgui_url}/#login
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
+    Wait Until Element Is Enabled    ${xpath_textbox_username}    timeout=${BROWSER_CONNECTION_TIMEOUT}
+    Wait Until Element Is Enabled    ${xpath_login_button}    timeout=${BROWSER_CONNECTION_TIMEOUT}
     Input Text    ${xpath_textbox_username}    ${username}
     Input Password    ${xpath_textbox_password}    ${password}
     Click Element    ${xpath_login_button}
@@ -64,5 +66,5 @@ Login GUI
 Suite Setup Execution
     [Documentation]    Do test suite setup tasks.
     Launch Browser And Login GUI
-    Wait Until Keyword Succeeds    30 sec    5 sec    Location Should Contain    dashboard
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Keyword Succeeds    ${BROWSER_CONNECTION_TIMEOUT}    ${BROWSER_CONNECTION_RETRY_TIMEOUT}    Location Should Contain    dashboard
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}

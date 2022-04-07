@@ -34,12 +34,22 @@ ${IPMI_PORT}      623
 ${OS_HOST}        10.32.50.56
 ${OS_USERNAME}    root
 ${OS_PASSWORD}    root
-${OS_WAIT_TIMEOUT}    ${15*60}
+${OS_WAIT_TIMEOUT}    15min
+${OS_WAIT_RETRY_TIMEOUT}    30s
+${SSH_CONNECTION_TIMEOUT}    30s
+# GUI Loading Timeout Setting
+${BROWSER_CONNECTION_TIMEOUT}    30s
+${BROWSER_CONNECTION_RETRY_TIMEOUT}    1s
+${BROWSER_PROCESSING_TIMEOUT}    300s
+# PowerStatus Loading Timeout Setting
+${POWERSTATUS_CHECK_TIMEOUT}    3min
+${POWERSTATUS_CHECK_RETRY_TIMEOUT}    5s
 #Gui xpath setting
 ${xpath_textbox_username}    xpath=//*[@id='userid']
 ${xpath_textbox_password}    xpath=//*[@id='password']
 ${xpath_login_button}    xpath=//*[@id='btn-login']
 ${xpath_clear_log_button}    xpath=//*[@id='idcl_log']
+${xpath_download_log_button}    xpath=//*[@id='idsave_elist_log']
 ${xpath_refresh_button}    xpath=//*[@id="main"]/div/header/nav/div/ul/li[4]
 ${xpath_processing_image}    xpath=//*[@id='processing_image']
 ${xpath_sensors_button}    xpath=//*[@id='main']/div/div/aside[1]/div/section/ul/li[2]

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0 (Python 3.8.10 on linux)" generated="20220401 07:41:43.773" rpa="false" schemaversion="3">
+<suite id="s1" name="Chassis Power Control" source="/home/caesar/Desktop/LunaTestAuto/Test_List/Basic_Test/chassis_power_control.robot">
+<kw name="Suite Setup Execution" library="GUI_Resource" type="SETUP">
+<doc>Do test suite setup tasks.</doc>
+<kw name="Launch Browser And Login GUI" library="GUI_Resource">
+<doc>Launch browser and login to NVDIA GUI.</doc>
+<kw name="Open Browser With URL" library="GUI_Resource">
+<arg>${webgui_url}</arg>
+<doc>Open browser with specified URL and returns browser id.</doc>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${browser_ID}</var>
+<arg>'${mode}' == 'headless'</arg>
+<arg>Launch Headless Browser</arg>
+<arg>${URL}</arg>
+<arg>${browser}</arg>
+<arg>ELSE</arg>
+<arg>Open Browser</arg>
+<arg>${URL}</arg>
+<arg>${browser}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Launch Headless Browser" library="GUI_Resource">
+<arg>${URL}</arg>
+<arg>${browser}</arg>
+<doc>Launch headless browser.</doc>
+<kw name="Start Virtual Display" library="XvfbRobot">
+<doc>Starts virtual display which will be
+ destroyed after test execution will be end</doc>
+<msg timestamp="20220401 07:41:44.782" level="INFO">Using virtual display: '1440x900x24'</msg>
+<status status="PASS" starttime="20220401 07:41:44.781" endtime="20220401 07:41:44.897"/>
+</kw>
+<kw name="Open Browser" library="Selenium2Library">
+<var>${browser_ID}</var>
+<arg>${URL}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220401 07:41:44.899" level="INFO">Opening browser 'firefox' to base url 'https://10.32.50.50'.</msg>
+<msg timestamp="20220401 07:41:44.901" level="INFO">Firefox driver log is always forced to to: /home/caesar/Desktop/LunaTestAuto/Test_List/Basic_Test/geckodriver-10.log</msg>
+<msg timestamp="20220401 07:41:46.745" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="FAIL" starttime="20220401 07:41:44.898" endtime="20220401 07:41:46.745"/>
+</kw>
+<kw name="Set Window Size" library="Selenium2Library">
+<arg>1920</arg>
+<arg>1080</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="NOT RUN" starttime="20220401 07:41:46.746" endtime="20220401 07:41:46.746"/>
+</kw>
+<status status="FAIL" starttime="20220401 07:41:44.779" endtime="20220401 07:41:46.746"/>
+</kw>
+<status status="FAIL" starttime="20220401 07:41:44.777" endtime="20220401 07:41:46.746"/>
+</kw>
+<status status="FAIL" starttime="20220401 07:41:44.774" endtime="20220401 07:41:46.746"/>
+</kw>
+<kw name="Login GUI" library="GUI_Resource">
+<arg>${username}</arg>
+<arg>${password}</arg>
+<doc>Login to NVDIA GUI.</doc>
+<status status="NOT RUN" starttime="20220401 07:41:46.747" endtime="20220401 07:41:46.747"/>
+</kw>
+<status status="FAIL" starttime="20220401 07:41:44.771" endtime="20220401 07:41:46.747"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>30 sec</arg>
+<arg>5 sec</arg>
+<arg>Location Should Contain</arg>
+<arg>dashboard</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="NOT RUN" starttime="20220401 07:41:46.748" endtime="20220401 07:41:46.748"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="Selenium2Library">
+<arg>${xpath_processing_image}</arg>
+<arg>timeout=300s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="NOT RUN" starttime="20220401 07:41:46.748" endtime="20220401 07:41:46.748"/>
+</kw>
+<status status="FAIL" starttime="20220401 07:41:44.769" endtime="20220401 07:41:46.748"/>
+</kw>
+<test id="s1-t1" name="chassis power off" line="14">
+<doc>This test case verfies system power off status
+Check capability of power control on Web GUI.</doc>
+<tag>chassis power off</tag>
+<tag>robot:exit</tag>
+<status status="FAIL" starttime="20220401 07:41:46.749" endtime="20220401 07:41:46.752">Test execution stopped due to a fatal error.</status>
+</test>
+<kw name="Close All Browsers" library="Selenium2Library" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20220401 07:41:46.753" endtime="20220401 07:41:46.754"/>
+</kw>
+<status status="FAIL" starttime="20220401 07:41:43.774" endtime="20220401 07:41:46.754">Suite setup failed:
+Execution terminated by signal</status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="0" skip="0" info="combined" combined="NOT robot:exit">NOT robot:exit</stat>
+<stat pass="0" fail="1" skip="0">chassis power off</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Chassis Power Control">Chassis Power Control</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

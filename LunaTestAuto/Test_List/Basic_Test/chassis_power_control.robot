@@ -11,19 +11,21 @@ ${find_log}       ${EMPTY}
 ${irow}           ${EMPTY}
 
 *** Test Cases ***
-chassis power off
+Chassis Power OFF
     [Documentation]    This test case verfies system power off status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis power off
+    ${power_status}=    Check Chassis Power Status
+    ${browser_ID}=    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     Go To    ${power_control_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Element Should Be Enabled    ${xpath_save_button}
     Click Element    ${xpath_power_off_radio}
     Click Element    ${xpath_save_button}
     Handle Alert
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util OFF
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util OFF
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -33,21 +35,21 @@ chassis power off
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis power on
+Chassis Power ON
     [Documentation]    This test case verfies system power on status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis power on
     Go To    ${power_control_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Element Should Be Enabled    ${xpath_save_button}
     Click Element    ${xpath_power_on_radio}
     Click Element    ${xpath_save_button}
     Handle Alert
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util ON
-    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}min    15s    Open Connection And Log In
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util ON
+    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}    ${OS_WAIT_RETRY_TIMEOUT}    Open Connection And Log In
     Close All Connections
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -57,22 +59,22 @@ chassis power on
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis power cycle
+Chassis Power Cycle
     [Documentation]    This test case verfies system power cycle status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis_power_control
     Go To    ${power_control_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Element Should Be Enabled    ${xpath_save_button}
     Click Element    ${xpath_power_cycle_radio}
     Click Element    ${xpath_save_button}
     Handle Alert
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util OFF
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util ON
-    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}min    15s    Open Connection And Log In
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util OFF
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util ON
+    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}    ${OS_WAIT_RETRY_TIMEOUT}    Open Connection And Log In
     Close All Connections
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -82,23 +84,23 @@ chassis power cycle
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis power hard reset
+Chassis Power Hard Reset
     [Documentation]    This test case verfies system power hard reset status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis_power_control
     ${power_status_before}=    Check Chassis Power Status
     Go To    ${power_control_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Element Should Be Enabled    ${xpath_save_button}
     Click Element    ${xpath_power_hard_reset_radio}
     Click Element    ${xpath_save_button}
     Handle Alert
     ${power_status_after}=    Check Chassis Power Status
     Should Be Equal    ${power_status_before}    ${power_status_before}
-    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}min    15s    Open Connection And Log In
+    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}    ${OS_WAIT_RETRY_TIMEOUT}    Open Connection And Log In
     Close All Connections
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -108,20 +110,20 @@ chassis power hard reset
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis power soft shutdown
+Chassis Power Soft Shutdown
     [Documentation]    This test case verfies system powersoft shutdone status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis_power_control
     ${power_status_before}=    Check Chassis Power Status
     Go To    ${power_control_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Element Should Be Enabled    ${xpath_save_button}
     Click Element    ${xpath_power_ACPI_shutdown_radio}
     Click Element    ${xpath_save_button}
     Handle Alert
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util OFF
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util OFF
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -131,16 +133,15 @@ chassis power soft shutdown
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis ipmi power on
+Chassis IPMI Power ON
     [Documentation]    This test case verfies system power on status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
-    Run External IPMI Standard Command    chassis power on
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util ON
-    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}min    15s    Open Connection And Log In
+    IPMI Command Power ON
+    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}    ${OS_WAIT_RETRY_TIMEOUT}    Open Connection And Log In
     Close All Connections
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -150,17 +151,17 @@ chassis ipmi power on
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis ipmi power cycle
+Chassis IPMI Power Cycle
     [Documentation]    This test case verfies system power cycle status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
     Run External IPMI Standard Command    chassis power cycle
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util OFF
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util ON
-    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}min    15s    Open Connection And Log In
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util OFF
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util ON
+    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}    ${OS_WAIT_RETRY_TIMEOUT}    Open Connection And Log In
     Close All Connections
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -170,14 +171,13 @@ chassis ipmi power cycle
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis ipmi power off
+Chassis IPMI Power OFF
     [Documentation]    This test case verfies system power off status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
-    Run External IPMI Standard Command    chassis power off
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util OFF
+    IPMI Command Power OFF
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -187,7 +187,7 @@ chassis ipmi power off
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis ipmi power reset
+Chassis IPMI Power Reset
     [Documentation]    This test case verfies system power hard reset of status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
@@ -195,10 +195,10 @@ chassis ipmi power reset
     Run External IPMI Standard Command    chassis power reset
     ${power_status_after}=    Check Chassis Power Status
     Should Be Equal    ${power_status_before}    ${power_status_before}
-    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}min    15s    Open Connection And Log In
+    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}    ${OS_WAIT_RETRY_TIMEOUT}    Open Connection And Log In
     Close All Connections
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -208,14 +208,14 @@ chassis ipmi power reset
     END
     Should Not Contain    ${find_log}    FAIL
 
-chassis ipmi power soft shutdown
+Chassis IPMI Power Soft Shutdown
     [Documentation]    This test case verfies system power soft shutdown of status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
     Run External IPMI Standard Command    chassis power soft
-    Wait Until Keyword Succeeds    3min    1s    Check Chassis Power Status Util OFF
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util OFF
     Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
     FOR    ${row}    IN RANGE    1    ${count}
         ${irow}    set Variable    [${row}]
@@ -241,3 +241,11 @@ Check Chassis Power Status Util OFF
 Open Connection And Log In
     Open Connection    ${OS_HOST}
     Login    ${OS_USERNAME}    ${OS_PASSWORD}
+
+IPMI Command Power ON
+    Run External IPMI Standard Command    chassis power on
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util ON
+
+IPMI Command Power OFF
+    Run External IPMI Standard Command    chassis power off
+    Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util OFF

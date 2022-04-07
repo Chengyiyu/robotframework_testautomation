@@ -9,18 +9,18 @@ Library           Collections
 Library           String
 
 *** Test Cases ***
-webpage case
+Webpage Case
     [Documentation]    ADC, CPU temp, DIMM zone temp, voltages and fan speed can be displayed correctly on Web page
     [Tags]    sensor_readings
     Suite Setup Execution
     Click Element    ${xpath_sensors_button}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=300s
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     FOR    ${sensor_name}    IN    @{sensers_name}
         Page Should Contain    ${sensor_name}
     END
     Close All Browsers
 
-ipmitool case
+Ipmitool Case
     [Documentation]    ADC, CPU temp, DIMM zone temp, voltages and fan speed can be displayed correctly through ipmitool
     [Tags]    sensor_readings
     # Example of SDR info command output:
