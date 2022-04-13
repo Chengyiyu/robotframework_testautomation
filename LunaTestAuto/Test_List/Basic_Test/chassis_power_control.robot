@@ -16,7 +16,7 @@ Chassis Power OFF
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis power off
     ${power_status}=    Check Chassis Power Status
-    ${browser_ID}=    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
+    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     Go To    ${power_control_url}
     Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Element Should Be Enabled    ${xpath_save_button}
@@ -39,6 +39,8 @@ Chassis Power ON
     [Documentation]    This test case verfies system power on status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis power on
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is on'    IPMI Command Power OFF
     Go To    ${power_control_url}
     Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Element Should Be Enabled    ${xpath_save_button}
@@ -63,6 +65,8 @@ Chassis Power Cycle
     [Documentation]    This test case verfies system power cycle status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis_power_control
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     Go To    ${power_control_url}
     Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Element Should Be Enabled    ${xpath_save_button}
@@ -88,6 +92,8 @@ Chassis Power Hard Reset
     [Documentation]    This test case verfies system power hard reset status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis_power_control
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     ${power_status_before}=    Check Chassis Power Status
     Go To    ${power_control_url}
     Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
@@ -114,6 +120,8 @@ Chassis Power Soft Shutdown
     [Documentation]    This test case verfies system powersoft shutdone status
     ...    Check capability of power control on Web GUI.
     [Tags]    chassis_power_control
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     ${power_status_before}=    Check Chassis Power Status
     Go To    ${power_control_url}
     Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
@@ -133,28 +141,12 @@ Chassis Power Soft Shutdown
     END
     Should Not Contain    ${find_log}    FAIL
 
-Chassis IPMI Power ON
-    [Documentation]    This test case verfies system power on status
-    ...    using IPMI Get Chassis status command.
-    [Tags]    chassis_power_control
-    IPMI Command Power ON
-    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}    ${OS_WAIT_RETRY_TIMEOUT}    Open Connection And Log In
-    Close All Connections
-    Go To    ${event_log_ipmi_url}
-    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
-    ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
-    FOR    ${row}    IN RANGE    1    ${count}
-        ${irow}    set Variable    [${row}]
-        ${resp} =    Get Text    ${xpath_IPMI_Event_Log_table_row}${irow}
-        ${find_log}=    Run Keyword And Ignore Error    Should Contain    ${resp}    c5h 6fh a1h 01h
-        Exit For Loop If    ${find_log} == ('PASS', None)
-    END
-    Should Not Contain    ${find_log}    FAIL
-
 Chassis IPMI Power Cycle
     [Documentation]    This test case verfies system power cycle status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     Run External IPMI Standard Command    chassis power cycle
     Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util OFF
     Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util ON
@@ -175,6 +167,8 @@ Chassis IPMI Power OFF
     [Documentation]    This test case verfies system power off status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     IPMI Command Power OFF
     Go To    ${event_log_ipmi_url}
     Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
@@ -191,6 +185,8 @@ Chassis IPMI Power Reset
     [Documentation]    This test case verfies system power hard reset of status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     ${power_status_before}=    Check Chassis Power Status
     Run External IPMI Standard Command    chassis power reset
     ${power_status_after}=    Check Chassis Power Status
@@ -212,6 +208,8 @@ Chassis IPMI Power Soft Shutdown
     [Documentation]    This test case verfies system power soft shutdown of status
     ...    using IPMI Get Chassis status command.
     [Tags]    chassis_power_control
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is off'    IPMI Command Power ON
     Run External IPMI Standard Command    chassis power soft
     Wait Until Keyword Succeeds    ${POWERSTATUS_CHECK_TIMEOUT}    ${POWERSTATUS_CHECK_RETRY_TIMEOUT}    Check Chassis Power Status Util OFF
     Go To    ${event_log_ipmi_url}
@@ -221,6 +219,26 @@ Chassis IPMI Power Soft Shutdown
         ${irow}    set Variable    [${row}]
         ${resp} =    Get Text    ${xpath_IPMI_Event_Log_table_row}${irow}
         ${find_log}=    Run Keyword And Ignore Error    Should Contain    ${resp}    c5h 6fh a4h 01h
+        Exit For Loop If    ${find_log} == ('PASS', None)
+    END
+    Should Not Contain    ${find_log}    FAIL
+
+Chassis IPMI Power ON
+    [Documentation]    This test case verfies system power on status
+    ...    using IPMI Get Chassis status command.
+    [Tags]    chassis_power_control
+    ${power_status}=    Check Chassis Power Status
+    Run Keyword If    '${power_status}' == 'Chassis Power is on'    IPMI Command Power OFF
+    IPMI Command Power ON
+    Wait Until Keyword Succeeds    ${OS_WAIT_TIMEOUT}    ${OS_WAIT_RETRY_TIMEOUT}    Open Connection And Log In
+    Close All Connections
+    Go To    ${event_log_ipmi_url}
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
+    ${count} =    Get Element Count    ${xpath_IPMI_Event_Log_table_row}
+    FOR    ${row}    IN RANGE    1    ${count}
+        ${irow}    set Variable    [${row}]
+        ${resp} =    Get Text    ${xpath_IPMI_Event_Log_table_row}${irow}
+        ${find_log}=    Run Keyword And Ignore Error    Should Contain    ${resp}    c5h 6fh a1h 01h
         Exit For Loop If    ${find_log} == ('PASS', None)
     END
     Should Not Contain    ${find_log}    FAIL

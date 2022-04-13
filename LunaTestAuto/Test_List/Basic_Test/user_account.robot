@@ -1,5 +1,4 @@
 *** Settings ***
-Suite Setup
 Resource          ../../Data/resource_variables.robot
 Resource          ../../lib/GUI_Resource.robot
 Resource          ../../lib/ipmi_client.robot
@@ -38,7 +37,7 @@ Error Password
     sleep    10min
     Launch Headless Browser
     Page Should Not Contain    User has been locked out. Try after few minutes
-    Login GUI    ${LUNA_USERNAME}    ${LUNA_PASSWORD}
+    Login GUI    ${BMC_USERNAME}    ${BMC_PASSWORD}
     Close All Browsers
 
 *** Keywords ***

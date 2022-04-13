@@ -4,7 +4,7 @@ Library           Selenium2Library
 Resource          ../Data/resource_variables.robot
 
 *** Variables ***
-${webgui_url}     https://${LUNA_BMCIP}
+${webgui_url}     https://${BMC_IP}
 
 *** Keywords ***
 Open Browser With URL
@@ -44,7 +44,7 @@ Launch Header Browser
     Set Global Variable    ${BROWSER_ID}
 
 Launch Browser And Login GUI
-    [Arguments]    ${username}=${LUNA_USERNAME}    ${password}=${LUNA_PASSWORD}
+    [Arguments]    ${username}=${BMC_USERNAME}    ${password}=${BMC_PASSWORD}
     [Documentation]    Launch browser and login to NVDIA GUI.
     Open Browser With URL    ${webgui_url}
     Login GUI    ${username}    ${password}
@@ -61,7 +61,8 @@ Login GUI
     Wait Until Element Is Enabled    ${xpath_login_button}    timeout=${BROWSER_CONNECTION_TIMEOUT}
     Input Text    ${xpath_textbox_username}    ${username}
     Input Password    ${xpath_textbox_password}    ${password}
-    Click Element    ${xpath_login_button}
+    Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
+    Click Button    ${xpath_login_button}
 
 Suite Setup Execution
     [Documentation]    Do test suite setup tasks.

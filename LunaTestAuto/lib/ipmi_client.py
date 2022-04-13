@@ -14,9 +14,9 @@ ipmi_interface = 'lanplus'
 ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '17')
 ipmi_timeout = BuiltIn().get_variable_value("${IPMI_TIMEOUT}", '3')
 ipmi_port = BuiltIn().get_variable_value("${IPMI_PORT}", '623')
-ipmi_username = BuiltIn().get_variable_value("${LUNA_USERNAME}", "admin")
-ipmi_password = BuiltIn().get_variable_value("${LUNA_PASSWORD}", "dgxluna.admin")
-ipmi_host = BuiltIn().get_variable_value("${LUNA_BMCIP}")
+ipmi_username = BuiltIn().get_variable_value("${BMC_USERNAME}", "admin")
+ipmi_password = BuiltIn().get_variable_value("${BMC_PASSWORD}", "dgxluna.admin")
+ipmi_host = BuiltIn().get_variable_value("${BMC_IP}")
 
 # Create a list of the required IPMI options.
 ipmi_required_options = ['I', 'C', 'N', 'p', 'U', 'P', 'H']
