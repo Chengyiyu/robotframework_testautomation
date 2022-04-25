@@ -14,6 +14,8 @@ ${BMC_PASSWORD}    dgxluna.admin
 ${GUI_BROWSER}    ff
 ${GUI_MODE}       headless
 # Default upgrade and downgrade image file name
+${BMC_UPGRADE_REVERSION}    17
+${BMC_DOWNGRADE_REVERSION}    16
 ${BMC_UPGRADE_IMAGE}    /home/caesar/Desktop/LunaTestAuto/Data/images/LUNA8BmcFw00.17.04.ima
 ${BMC_DOWNGRADE_IMAGE}    /home/caesar/Desktop/LunaTestAuto/Data/images/LUNA8BmcFw00.16.12-luna-rel.ima
 ${BIOS_UPGRADE_IMAGE}    ff
@@ -65,9 +67,9 @@ ${xpath_clear_log_button}    xpath=//*[@id='idcl_log']
 ${xpath_download_log_button}    xpath=//*[@id='idsave_elist_log']
 ${xpath_refresh_button}    xpath=//*[@id="main"]/div/header/nav/div/ul/li[4]
 ${xpath_processing_image}    xpath=//*[@id="processing_layout"]/div
-${xpath_sensors_button}    xpath=//*[@id='main']/div/div/aside[1]/div/section/ul/li[2]
 ${xpath_power_control_button}    xpath=//*[@id="main"]/div/div/aside[1]/div/section/ul/li[11]
 ${xpath_save_button}    xpath=//*[@id="save"]
+${xpath_event_filters_data}    xpath=//*[@id="main"]/div/div/aside[2]/div/section[2]/div[4]/div
 ${xpath_start_bmc_firmware_update_button}    xpath=//*[@id="start"]
 ${xpath_start_bios_firmware_update_button}    xpath=//*[@id="proceed"]
 ${xpath_power_off_radio}    xpath=//*[@id="main"]/div/div/aside[2]/div/section[2]/div/div/div[2]/form/div[1]/label/div
@@ -81,7 +83,9 @@ ${xpath_firmware_checks_button}    xpath=//*[@id="btnFirmwareChecks"]
 ${xpath_preserve_all_configuration_checkbox}    xpath=//*[@id="idpreserveAll"]
 ${xpath_upload_firmware_image}    xpath=//*[@id="mainfirmware_image"]
 ${xpath_launchKVM_button}    xpath=//*[@id="download"]
+${sensors_url}    https://${BMC_IP}/#sensors
 ${event_log_ipmi_url}    https://${BMC_IP}/#logs/event-log
 ${power_control_url}    https://${BMC_IP}/#power-control
 ${FW_upgrade_url}    https://${BMC_IP}/#maintenance/firmware_update_wizard
 ${remote_control_url}    https://${BMC_IP}/#remote_control
+${event_filters_url}    https://${BMC_IP}/#settings/pef/event_filters

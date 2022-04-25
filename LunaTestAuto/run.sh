@@ -1,3 +1,3 @@
-robot Test_List/Basic_Test/sensor_readings.robot
+robot Test_List/Basic_Test/test_sensor_readings.robot
 
 

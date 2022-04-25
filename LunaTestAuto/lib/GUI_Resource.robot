@@ -67,5 +67,5 @@ Login GUI
 Suite Setup Execution
     [Documentation]    Do test suite setup tasks.
     Launch Browser And Login GUI
-    Wait Until Keyword Succeeds    ${BROWSER_CONNECTION_TIMEOUT}    ${BROWSER_CONNECTION_RETRY_TIMEOUT}    Location Should Contain    dashboard
+    Wait Until Page Contains    Dashboard    timeout=${BROWSER_PROCESSING_TIMEOUT}
     Wait Until Element Is Not Visible    ${xpath_processing_image}    timeout=${BROWSER_PROCESSING_TIMEOUT}
