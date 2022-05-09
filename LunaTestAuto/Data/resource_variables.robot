@@ -7,7 +7,7 @@ Library           OperatingSystem
 *** Variables ***
 #BMC setting
 ${PORT}           ${EMPTY}
-${BMC_IP}         10.32.50.50
+${BMC_IP}         10.32.50.22
 ${BMC_USERNAME}    admin
 ${BMC_PASSWORD}    dgxluna.admin
 # Default GUI browser and mode is set to "Firefox" and "headless"
@@ -39,7 +39,7 @@ ${SSH_PORT}       22
 ${HTTPS_PORT}     443
 ${IPMI_PORT}      623
 # OS related parameters.
-${OS_HOST}        10.32.50.56
+${OS_HOST}        10.32.50.24
 ${OS_USERNAME}    root
 ${OS_PASSWORD}    root
 ${OS_WAIT_TIMEOUT}    15min
